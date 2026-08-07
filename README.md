@@ -33,6 +33,13 @@ Updates have been removed by:
 
 Linux distributions have had desktop and auto-updating removed. The top level folder is the version of Chrome.
 
+Assets are published for:
+
+- `linux` — `linux/amd64` (Google `_amd64.deb`)
+- `linux_arm64` — `linux/arm64` (Google `_arm64.deb`, available for recent Chrome stables starting with the public linux-arm64 release on 2026-07-30 / Chrome 151+)
+
+`@ulixee/chrome-app` selects `linux_arm64` automatically when `process.arch === 'arm64'` on Linux.
+
 #### Install Dependencies
 
 Inside each tar.gz, an "install-dependencies.deb" has been included. It's a debian installer that installs all the dependencies for the given version of chrome.

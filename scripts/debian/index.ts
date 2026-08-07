@@ -16,9 +16,9 @@ export async function process(
     downloaded = await downloadInstaller(url, os, version);
   } catch (error) {
     if (String(error) === 'Not found' || error.response?.status === 404) {
+      // Only clear the missing OS key (e.g. linux_arm64 for older Chrome majors).
       Versions.set(version, {
-        linux: undefined,
-        linux_rpm: undefined,
+        [os]: undefined,
       });
     }
     console.log('Could not download file at %s', url);

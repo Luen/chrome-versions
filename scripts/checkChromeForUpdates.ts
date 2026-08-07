@@ -194,8 +194,12 @@ async function getChromeUpdateUrlsLinux() {
   const versions = request.data;
   for (const entry of versions) {
     const version = entry.version;
+    // Google publishes linux-arm64 Chrome debs for recent stables (Chrome 151+ /
+    // publicly released 2026-07-30). Older versions return 404 and are cleared
+    // during syncVersions download.
     Versions.set(version, {
       linux: `http://dl.google.com/linux/chrome/deb/pool/main/g/google-chrome-stable/google-chrome-stable_${version}-1_amd64.deb`,
+      linux_arm64: `http://dl.google.com/linux/chrome/deb/pool/main/g/google-chrome-stable/google-chrome-stable_${version}-1_arm64.deb`,
       linux_rpm: `http://dl.google.com/linux/chrome/rpm/stable/x86_64/google-chrome-stable-${version}-1.x86_64.rpm`,
     });
   }

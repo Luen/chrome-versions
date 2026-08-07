@@ -38,7 +38,7 @@ async function syncVersions() {
         await Windows.process(osToSync, version, releases);
       } else if (osToSync === 'mac' || osToSync === 'mac_arm64') {
         await Mac.process(osToSync, version, releases);
-      } else if (osToSync === 'linux') {
+      } else if (osToSync === 'linux' || osToSync === 'linux_arm64') {
         await Debian.process(osToSync, version, releases);
       }
     }

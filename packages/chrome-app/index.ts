@@ -6,7 +6,7 @@ import { installChrome } from './lib/installChrome';
 
 const windowsLocalAppData = process.env.LOCALAPPDATA || Path.join(Os.homedir(), 'AppData', 'Local');
 
-type IPlatformName = 'linux' | 'mac' | 'mac_arm64' | 'win32' | 'win64';
+type IPlatformName = 'linux' | 'linux_arm64' | 'mac' | 'mac_arm64' | 'win32' | 'win64';
 
 export default class ChromeApp {
   public static aptScriptPath = `/tmp/apt-install-chrome-dependencies.sh`;
@@ -15,12 +15,14 @@ export default class ChromeApp {
     mac_arm64: Path.join('Google Chrome.app', 'Contents', 'MacOS', 'Google Chrome'),
     mac: Path.join('Google Chrome.app', 'Contents', 'MacOS', 'Google Chrome'),
     linux: 'chrome',
+    linux_arm64: 'chrome',
     win32: 'chrome.exe',
     win64: 'chrome.exe',
   };
 
   public static cacheDirectoryByPlatform = {
     linux: process.env.XDG_CACHE_HOME || Path.join(Os.homedir(), '.cache'),
+    linux_arm64: process.env.XDG_CACHE_HOME || Path.join(Os.homedir(), '.cache'),
     mac: Path.join(Os.homedir(), 'Library', 'Caches'),
     mac_arm64: Path.join(Os.homedir(), 'Library', 'Caches'),
     win32: windowsLocalAppData,
@@ -116,7 +118,10 @@ export default class ChromeApp {
       if (Os.arch() === 'arm64') return 'mac_arm64';
       return 'mac';
     }
-    if (osPlatformName === 'linux') return 'linux';
+    if (osPlatformName === 'linux') {
+      if (Os.arch() === 'arm64') return 'linux_arm64';
+      return 'linux';
+    }
     if (osPlatformName === 'win32') {
       if (Os.arch() === 'x64') return 'win64';
       return 'win32';

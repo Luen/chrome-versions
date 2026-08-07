@@ -12,6 +12,7 @@ const fileExts = {
   mac: 'dmg',
   mac_arm64: 'dmg',
   linux: 'deb',
+  linux_arm64: 'deb',
 };
 
 export { downloadsDir, assetsDir };

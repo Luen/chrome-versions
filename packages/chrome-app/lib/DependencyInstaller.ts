@@ -13,7 +13,7 @@ export class DependencyInstaller {
     const platform = this.chromeApp.osPlatformName;
 
     const isWindows64 = platform === 'win64';
-    const isLinux = platform === 'linux';
+    const isLinux = platform === 'linux' || platform === 'linux_arm64';
 
     if (!isLinux && !isWindows64) return;
     if (await this.isValidated()) return;
