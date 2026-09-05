@@ -11,6 +11,9 @@ importers:
       '@actions/github':
         specifier: ^4.0.0
         version: 4.0.0
+      '@ulixee/chrome-app':
+        specifier: workspace:*
+        version: link:packages/chrome-app
       axios:
         specifier: ^1.12.0
         version: 1.13.2

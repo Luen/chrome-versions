@@ -15,7 +15,8 @@
     "tar": "^7.4.3",
     "uuid": "^8.3.2",
     "xml2js": "^0.5.0",
-    "plist": "^3.0.1"
+    "plist": "^3.0.1",
+    "@ulixee/chrome-app": "workspace:*"
   },
   "devDependencies": {
     "@types/tar": "^4.0.4",
