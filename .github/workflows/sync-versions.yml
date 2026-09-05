@@ -1,4 +1,4 @@
-name: Sync Version Releases
+﻿name: Sync Version Releases
 
 on:
   - push
@@ -10,6 +10,7 @@ concurrency:
 jobs:
 
   windows:
+    if: github.ref == 'refs/heads/main' || github.event_name == 'workflow_dispatch'
     runs-on: windows-latest
 
     steps:
@@ -37,6 +38,7 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SA_SHOW_REPLAY: false
   mac:
+    if: github.ref == 'refs/heads/main' || github.event_name == 'workflow_dispatch'
     runs-on: macos-latest
     needs: windows
 
@@ -77,6 +79,7 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   ubuntu:
+    if: github.ref == 'refs/heads/main' || github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
     needs: [windows,mac]
 
@@ -117,3 +120,18 @@ jobs:
         with:
           branch: main
           commit_message: Sync Versions Cleanup
+
+  verify-pnpm:
+    if: github.ref != 'refs/heads/main' && github.event_name != 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10.33.0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+      - name: Install and build
+        run: pnpm install --frozen-lockfile
