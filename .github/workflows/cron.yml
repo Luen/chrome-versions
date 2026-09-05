@@ -25,7 +25,7 @@ jobs:
           node-version: 20
 
       - name: Yarn Install
-        run: yarn
+        run: pnpm install --frozen-lockfile
         env:
           SA_REPLAY_SKIP_BINARY_DOWNLOAD: true
           SA_SKIP_DOWNLOAD: false

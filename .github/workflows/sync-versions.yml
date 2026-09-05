@@ -22,7 +22,7 @@ jobs:
           node-version: 20
 
       - name: Yarn Install
-        run: yarn
+        run: pnpm install --frozen-lockfile
 
       - name: Synchronize Versions File
         run: node ./scripts/syncVersions.js
@@ -44,7 +44,7 @@ jobs:
           node-version: 20
 
       - name: Yarn Install
-        run: yarn
+        run: pnpm install --frozen-lockfile
 
       - name: Import Certs
         env:
@@ -81,7 +81,7 @@ jobs:
           registry-url: 'https://registry.npmjs.org/'
 
       - name: Yarn Install
-        run: yarn
+        run: pnpm install --frozen-lockfile
 
       - name: Synchronize Versions File
         run: node ./scripts/syncVersions.js
