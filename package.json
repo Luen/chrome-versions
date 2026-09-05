@@ -2,12 +2,12 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "postinstall": "tsc --b --clean && npm run build",
+    "postinstall": "tsc --b --clean && pnpm run build",
     "build": "tsc --b",
     "env": "env $(cat .env | xargs)",
-    "mac": "npm run build && env $(cat .env | xargs) SYNC_OS_KEYS=mac,mac_arm64 SA_SHOW_REPLAY=false node ./scripts/syncVersions.js",
-    "win": "npm run build && env $(cat .env | xargs) SYNC_OS_KEYS=win32,win64 SA_SHOW_REPLAY=false node ./scripts/syncVersions.js",
-    "linux": "npm run build && env $(cat .env | xargs) SYNC_OS_KEYS=linux SA_SHOW_REPLAY=false node ./scripts/syncVersions.js"
+    "mac": "pnpm run build && env $(cat .env | xargs) SYNC_OS_KEYS=mac,mac_arm64 SA_SHOW_REPLAY=false node ./scripts/syncVersions.js",
+    "win": "pnpm run build && env $(cat .env | xargs) SYNC_OS_KEYS=win32,win64 SA_SHOW_REPLAY=false node ./scripts/syncVersions.js",
+    "linux": "pnpm run build && env $(cat .env | xargs) SYNC_OS_KEYS=linux SA_SHOW_REPLAY=false node ./scripts/syncVersions.js"
   },
   "dependencies": {
     "@actions/github": "^4.0.0",
@@ -15,7 +15,8 @@
     "tar": "^7.4.3",
     "uuid": "^8.3.2",
     "xml2js": "^0.5.0",
-    "plist": "^3.0.1"
+    "plist": "^3.0.1",
+    "@ulixee/chrome-app": "workspace:*"
   },
   "devDependencies": {
     "@types/tar": "^4.0.4",
@@ -26,5 +27,6 @@
   },
   "workspaces": [
     "packages/*"
-  ]
+  ],
+  "packageManager": "pnpm@10.33.0"
 }

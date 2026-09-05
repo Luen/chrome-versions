@@ -18,14 +18,20 @@ jobs:
         with:
           ref: ${{ github.head_ref }}
           token: ${{ secrets.PAT }}
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10.33.0
+
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
+          cache: pnpm
 
-      - name: Yarn Install
-        run: yarn
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
         env:
           SA_REPLAY_SKIP_BINARY_DOWNLOAD: true
           SA_SKIP_DOWNLOAD: false
